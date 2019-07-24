@@ -1,0 +1,2 @@
+.breadcrumb-item + .breadcrumb-item::before{content: '|';}
+.my_bgc{background: #f5f5f5;}
