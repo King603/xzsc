@@ -1,0 +1,9 @@
+.my_bg_grag{ background:linear-gradient(to bottom,#f0f0f0,#e0e0e0);}
+.my_input{outline: 0;width: 10%;}
+.col-lg-4 .card,.col-md-6 .card,.col-sm-12 .card{transition: all 1s;}
+.col-lg-4 .card:hover,.col-md-6 .card:hover,.col-sm-12 .card:hover{transform: scale(1.05);}
+.my_input_size{
+    width: 0.9rem;height:0.9rem;
+    line-height: 0.9rem;text-align: center;
+}
+.w-40{width: 40%;}
