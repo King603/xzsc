@@ -9,12 +9,15 @@ var router=express.Router();
 router.post('/reg',(req,res)=>{
 	//获取数据
 	var obj=req.body;
-	var i=400;
 	//验证每一项是否为空
+	var i=400;
 	for(var key in obj){
 		i++;
-		if(!obj[key])res.send({code:i,msg:key+' required'});
-		return;
+		if(!obj[key])
+		{
+			res.send({code:i,msg:key+' required'});
+			return;
+		}
 	}
 	//执行SQL语句
 	pool.query('insert into xz_user set ?',[obj],(err,result)=>{

@@ -1,21 +1,20 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>无标题文档</title>
-    </head>
-    <body onload="show()">
+
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <script src="ajax.js"></script>
+</head>
+
+<body onload="show()">
     <h2>用户列表</h2>
-        <div id="d1"></div>
-        <script>
-            function show(){
-                var xhr=new XMLHttpRequest();
-                xhr.onreadystatechange=()=>{
-                    if(xhr.readyState==4&&xhr.status==200){
-                        var result=xhr.responseText;
-                        //json解析，解析结果是一个对象数组
-                        var arr=JSON.parse(result);
-                        var htmlstr=`
+    <div id="d1"></div>
+    <script>
+        function show() {
+            ajax("/pro/V1/list", "get", function (result) {
+                var arr = JSON.parse(result);
+                var htmlstr = `
                         <table border="1px" width="800px">
                                 <tr>
                                     <th>登录名称</th>
@@ -26,11 +25,11 @@
                                     <th>操作</th>
                                 </tr>
                         `;
-                        for(var i=0;i<arr.length;i++){
-                            if(arr[i].gender==1)var gender="男";
-                            else if(arr[i].gender==0)var gender="女";
-                            else var gender="保密";
-                            htmlstr+=`
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i].gender == 1) var gender = "男";
+                    else if (arr[i].gender == 0) var gender = "女";
+                    else var gender = "保密";
+                    htmlstr += `
                                 <tr>
                                     <td>${arr[i].uname}</td>
                                     <td>${arr[i].email}</td>
@@ -43,28 +42,32 @@
                                     </td>
                                 </tr>	
                             `;
-                        }
-                        htmlstr+=`</table>`;
-                        d1.innerHTML=htmlstr;  
-                    }
                 }
-                xhr.open("get","/pro/V1/list",true);
-                xhr.send();
-            }
-            function deleteUser($uid){
-                var xhr=new XMLHttpRequest();
-                xhr.onreadystatechange=()=>{
-                    if(xhr.readyState==4&&xhr.status==200){
-                        var result=xhr.responseText;
-                        if(result==1){
-                            alert("删除成功");
-                            show();
-                        }else alert("删除失败");
-                    }
+                htmlstr += `</table>`;
+                d1.innerHTML = htmlstr;
+            });
+        }
+        function deleteUser($uid) {
+            ajax("/pro/V1/deluser/","delete",(result)=>{
+                if (result == 1) {
+                        alert("删除成功");
+                        show();
+                    } else alert("删除失败");
+            },$uid);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var result = xhr.responseText;
+                    if (result == 1) {
+                        alert("删除成功");
+                        show();
+                    } else alert("删除失败");
                 }
-                xhr.open("delete","/pro/V1/deluser/"+$uid,true);
-                xhr.send();
             }
-        </script>
-    </body>
+            xhr.open("delete", "/pro/V1/deluser/" + $uid, true);
+            xhr.send();
+        }
+    </script>
+</body>
+
 </html>

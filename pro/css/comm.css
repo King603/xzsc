@@ -11,9 +11,9 @@ a {text-decoration: none; }
     .my_header{height:11rem;}
     .my_footer{height:60rem;}
 }
-div div img{
+div div div img{
   transition: all 1s;
 }
-div div img:hover{
+div div div img:hover{
   transform: scale(1.1);
 }

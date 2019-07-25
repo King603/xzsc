@@ -1,0 +1,2 @@
+.breadcrumb-item + .breadcrumb-item::before{content: '>';}
+.my_bg_grag{ background:linear-gradient(to bottom,#f0f0f0,#a0a0a0);}

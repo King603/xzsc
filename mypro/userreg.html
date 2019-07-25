@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>注册</title>
-        <script>
-            function regUser(){
-                var $uname=uname.value;
-                var $upwd=upwd.value;
-                if($upwd.length<6){alert("密码小于6位数");return;}
-                var $cupwd=cupwd.value;
-                if($upwd!==$cupwd){alert("密码不一致");return;}
-                var $email=email.value;
-                var $phone=phone.value;
-                
-                var xhr=new XMLHttpRequest();
-                xhr.onreadystatechange=()=>{
-                    if(xhr.readyState==4&&xhr.status==200){
-                        var result=xhr.responseText;
-                        if(result==1)alert("注册成功");
-                        else if(result==0)alert("注册失败");
-                        else alert("未接收到用户信息")
-                    }
+
+<head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <script src="ajax.js"></script>
+    <script>
+        function regUser() {
+            var $uname = uname.value;
+            var $upwd = upwd.value;
+            if ($upwd.length < 6) { alert("密码小于6位数"); return; }
+            var $cupwd = cupwd.value;
+            if ($upwd !== $cupwd) { alert("密码不一致"); return; }
+            var $email = email.value;
+            var $phone = phone.value;
+            // ajax("/pro/V1/reg/", "post", (result) => {
+            //     if (result == 1) alert("注册成功");
+            //     else if (result == 0) alert("注册失败");
+            //     else alert("未接收到用户信息")
+            // }, $uname + "&" + $upwd + "&" + $email + "&" + $phone);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var result = xhr.responseText;
+                    if (result == 1) alert("注册成功");
+                    else if (result == 0) alert("注册失败");
+                    else alert("未接收到用户信息")
                 }
-                xhr.open("post","/pro/V1/reg/"+$uname+"&"+$upwd+"&"+$email+"&"+$phone,true);
-                xhr.send();
             }
-        </script>
-    </head>
-    <body>
-        <input type="text" id="uname" placeholder="请输入您的用户名"><br>
-        <input type="text" id="upwd" placeholder="请输入您的用户密码"><br>
-        <input type="text" id="cupwd" placeholder="请确认您的用户密码"><br>
-        <input type="email" id="email" placeholder="请输入您的验证邮箱"><br>
-        <input type="text" id="phone" placeholder="请输入您的联系电话"><br>
-        <input type="button" value="提交" onclick="regUser()">
-    </body>
+            xhr.open("post", "/pro/V1/reg/" + $uname + "&" + $upwd + "&" + $email + "&" + $phone, true);
+            xhr.send();
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="uname" placeholder="请输入您的用户名"><br>
+    <input type="text" id="upwd" placeholder="请输入您的用户密码"><br>
+    <input type="text" id="cupwd" placeholder="请确认您的用户密码"><br>
+    <input type="email" id="email" placeholder="请输入您的验证邮箱"><br>
+    <input type="text" id="phone" placeholder="请输入您的联系电话"><br>
+    <input type="button" value="提交" onclick="regUser()">
+</body>
+
 </html>
