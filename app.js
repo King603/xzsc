@@ -13,10 +13,11 @@ var app=express();
 //监听端口
 app.listen(8080);
 //把静态资源托管到public目录下
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(express.static('myajax'));
 app.use(express.static('mypro'));
 app.use(express.static("my"));
+app.use(express.static("pro"));
 app.use(bodyParser.urlencoded({
 	extended:false
 }));

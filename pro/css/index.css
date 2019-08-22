@@ -27,10 +27,16 @@
 .my_h1{height: 377px;}
 .my_h2{height: 233px;}
 .bg_grag{background: #e8e8e8;}
-div div img{
+.img1,
+.img2,
+.img3,
+.img4{
     transition: all 1s;
 }
-div div img:hover{
+.img1:hover,
+.img2:hover,
+.img3:hover,
+.img4:hover{
     transform: scale(1.1);
 }
 .img1{
